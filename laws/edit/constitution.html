@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<SCRIPT language=JavaScript> 
+  function password()
+  {
+    var testV = 1; 
+    var pass1 = prompt('请输入密码:',''); 
+    while (testV < 3)
+    {
+      if (!pass1) 
+      history.go(-1); 
+      if (pass1 == "19491001")
+      {
+        alert('密码正确!'); 
+        break; 
+      } 
+      testV+=-1; 
+      var pass1 = prompt('密码错误!请重新输入:'); 
+    } 
+    if (pass1!="password" & testV ==3) 
+    history.go(-1); 
+    return " "; 
+  } 
+  document.write(password()); 
+</SCRIPT>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C2201联合国 | United Nations of C2201</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>C2201联合国 | United Nations of C2201</h1>
+        <nav>
+            <ul>
+                <li><a href="https://c2201.github.io/un">首页</a></li>
+                <li><a href="https://c2201.github.io/un-laws">联合国法律</a></li>
+                <!-- <li><a href="https://c2201.github.io/#links">网站直达</a></li> -->
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section id="hero">
+    <div class="container">
+        <h2>欢迎来到C2201联合国官方网站！<br>Welcome to the official website of United Nations of C2201!</h2>
+    </div>
+</section>
+
+<!-- 请注意，这里是你将要按照我的要求补充的内容 -->
+<section id="constitution">
+    <div class="container">
+        <h3>编辑宪法</h3>
+        <textarea id="constitution-textarea" style="height: calc(60vh - 40px); width: 90%;"> </textarea>
+        <button id="save-button">保存更改</button>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>版权信息 © 2024 C2201联合国 保留所有权利</p>
+        <p>Copyright © 2024 United Nations of C2201 All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    window.onload = function() {
+        const textarea = document.getElementById('constitution-textarea');
+        const saveButton = document.getElementById('save-button');
+    
+        // 读取文件内容并填充到输入框中
+        fetch('/laws/constitution.txt')
+            .then(response => response.text())
+            .then(data => {
+                textarea.value = data;
+            });
+    
+        // 点击保存按钮时将输入框内容保存到文件中
+        saveButton.addEventListener('click', function() {
+            const content = textarea.value;
+            fetch('/laws/constitution.txt', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: content
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('保存成功！');
+                } else {
+                    alert('保存失败，请重试。');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    };
+</script>
+
+</body>
+</html>
