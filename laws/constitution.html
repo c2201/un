@@ -49,10 +49,18 @@
 </footer>
 
 <script>
-    fetch('constitution.txt')
+    fetch('http://www.xnote.cn/note/55673716/')
         .then(response => response.text())
-        .then(data => {
-            document.getElementById('constitution-text').innerText = data;
+        .then(html => {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            
+            const noteContent = tempDiv.querySelector('#note_content p').innerText;
+
+            document.getElementById('constitution-text').innerText = noteContent;
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
 </script>
 
