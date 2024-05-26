@@ -74,7 +74,7 @@
         const saveButton = document.getElementById('save-button');
     
         // 读取文件内容并填充到输入框中
-        fetch('/laws/constitution.txt')
+        fetch('../constitution.txt')
             .then(response => response.text())
             .then(data => {
                 textarea.value = data;
@@ -83,7 +83,7 @@
         // 点击保存按钮时将输入框内容保存到文件中
         saveButton.addEventListener('click', function() {
             const content = textarea.value;
-            fetch('/laws/constitution.txt', {
+            fetch('../constitution.txt', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'text/plain'
