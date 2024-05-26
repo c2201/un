@@ -38,6 +38,10 @@
         <br>
         <br>
         <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
 </section>
 
@@ -49,18 +53,10 @@
 </footer>
 
 <script>
-    fetch('http://www.xnote.cn/note/55673716/')
+    fetch('constitution.txt')
         .then(response => response.text())
-        .then(html => {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = html;
-            
-            const noteContent = tempDiv.querySelector('#note_content p').innerText;
-
-            document.getElementById('constitution-text').innerText = noteContent;
-        })
-        .catch(error => {
-            console.error('Error:', error);
+        .then(data => {
+            document.getElementById('constitution-text').innerText = data;
         });
 </script>
 
